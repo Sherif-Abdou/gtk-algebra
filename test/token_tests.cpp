@@ -4,7 +4,7 @@
 
 
 #include <boost/test/unit_test.hpp>
-#include "../lib/Lexer.h"
+#include "../lib/lexer/Lexer.h"
 
 BOOST_AUTO_TEST_SUITE(token_test)
 
