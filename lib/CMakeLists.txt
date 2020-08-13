@@ -1,1 +1,1 @@
-add_library(gtk_algebra_lib STATIC Token.cpp)
+add_library(gtk_algebra_lib STATIC Token.cpp Lexer.cpp Lexer.h)
