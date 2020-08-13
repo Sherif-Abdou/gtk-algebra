@@ -1,0 +1,1 @@
+add_library(gtk_algebra_lib STATIC Token.cpp)
