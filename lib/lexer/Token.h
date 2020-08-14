@@ -10,6 +10,7 @@
 using std::string;
 
 enum TokenTypes {
+    tok_unknown = 0,
     tok_num = -1,
     tok_variable = -2,
     tok_plus = -3,
@@ -21,6 +22,8 @@ enum TokenTypes {
 };
 
 struct Token {
+    Token();
+
     Token(TokenTypes type, const string &iden);
     Token(TokenTypes type);
 

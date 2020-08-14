@@ -9,3 +9,7 @@ Token::Token(TokenTypes type, const string &iden) : type(type), iden(iden) {
 }
 
 Token::Token(TokenTypes type) : type(type), iden("") {}
+
+Token::Token() {
+
+}

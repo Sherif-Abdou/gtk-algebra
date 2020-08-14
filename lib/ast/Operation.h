@@ -6,7 +6,11 @@
 #define GTK_ALGEBRA_TEST_OPERATION_H
 
 
+#include <memory>
 #include "Expression.h"
+
+
+using std::unique_ptr;
 
 enum OperationTypes {
     addition = -1,
@@ -18,8 +22,8 @@ enum OperationTypes {
 struct Operation: public Expression {
     Operation(OperationTypes type);
 
-    Expression lfs;
-    Expression rhs;
+    unique_ptr<Expression> lfs;
+    unique_ptr<Expression> rhs;
     OperationTypes type;
 };
 

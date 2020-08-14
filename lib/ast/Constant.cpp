@@ -3,5 +3,7 @@
 //
 
 #include "Constant.h"
+#include <exception>
 
 Constant::Constant(double value) : value(value) {}
+
