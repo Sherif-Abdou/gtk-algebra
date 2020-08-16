@@ -5,6 +5,6 @@
 #include "Expression.h"
 
 
-Expression::~Expression() {
+void Expression::none() {
 
 }

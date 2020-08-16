@@ -28,16 +28,18 @@ public:
 private:
     unique_ptr<Expression> lfs;
     unique_ptr<Expression> rhs;
+    unique_ptr<Expression> curr_top;
 public:
     const unique_ptr<Expression> &getRhs() const;
 
 private:
     Expression** current;
 
+    OperationTypes get_type(Token token);
     void add_value(Expression *val, Expression*& expr);
     void parse_side();
     void add_operation(unique_ptr<Operation> &new_operation);
-    void replace(Operation* in, Expression* from, unique_ptr<Operation> &to);
+    void replace(Operation* in, Expression* from, unique_ptr<Expression> &to);
     void replace(Expression* in, Expression* from, unique_ptr<Operation> &to);
 };
 

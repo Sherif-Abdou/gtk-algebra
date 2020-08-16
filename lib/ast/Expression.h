@@ -7,8 +7,7 @@
 
 
 struct Expression {
-public:
-    virtual ~Expression();
+    virtual void none();
 };
 
 
