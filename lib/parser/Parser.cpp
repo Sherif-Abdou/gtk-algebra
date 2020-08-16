@@ -13,13 +13,16 @@ Parser::Parser(Lexer &lexer) : lexer(lexer) {
     this->precedent[subtraction] = 2;
     this->precedent[multiplication] = 1;
     this->precedent[division] = 1;
-    auto tmp = lfs.get();
 }
 
 void Parser::parse() {
-    ScopeParser sub_parser = ScopeParser(this->lexer);
-    auto ptr = sub_parser.parse_side();
-    lfs = std::move(ptr);
+    ScopeParser sub_parser_left = ScopeParser(this->lexer);
+    auto ptr_left = sub_parser_left.parse_side();
+    lfs = std::move(ptr_left);
+
+    ScopeParser sub_parser_right = ScopeParser(this->lexer);
+    auto ptr_right = sub_parser_right.parse_side();
+    rhs = std::move(ptr_right);
 //    if (auto *op = dynamic_cast<Operation *>(ptr.get())) {
 //    } else {
 //        lfs = unique_ptr<Expression>(ptr.get());

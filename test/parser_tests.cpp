@@ -11,7 +11,7 @@
 BOOST_AUTO_TEST_SUITE(tests)
 
 BOOST_AUTO_TEST_CASE(test_constant) {
-    Lexer lexer = Lexer("5");
+    Lexer lexer = Lexer("5=0");
     Parser parser = Parser(lexer);
 
     parser.parse();
@@ -22,7 +22,7 @@ BOOST_AUTO_TEST_CASE(test_constant) {
 }
 
 BOOST_AUTO_TEST_CASE(test_variable) {
-    Lexer lexer = Lexer("v");
+    Lexer lexer = Lexer("v=0");
     Parser parser = Parser(lexer);
 
     parser.parse();
@@ -33,7 +33,7 @@ BOOST_AUTO_TEST_CASE(test_variable) {
 }
 
 BOOST_AUTO_TEST_CASE(test_operation) {
-    Lexer lexer = Lexer("3+1*5");
+    Lexer lexer = Lexer("3+1*5=0");
     Parser parser = Parser(lexer);
 
     parser.parse();
@@ -49,7 +49,7 @@ BOOST_AUTO_TEST_CASE(test_operation) {
 }
 
 BOOST_AUTO_TEST_CASE(test_other_operation) {
-    Lexer lexer = Lexer("2+3+4-5");
+    Lexer lexer = Lexer("2+3+4-5=0");
     Parser parser = Parser(lexer);
 
     parser.parse();
@@ -60,7 +60,7 @@ BOOST_AUTO_TEST_CASE(test_other_operation) {
 }
 
 BOOST_AUTO_TEST_CASE(test_parenth_operation) {
-    Lexer lexer = Lexer("(2+3)*4");
+    Lexer lexer = Lexer("(2+3)*4=0");
     Parser parser = Parser(lexer);
 
     parser.parse();
@@ -69,6 +69,18 @@ BOOST_AUTO_TEST_CASE(test_parenth_operation) {
     auto right_const = dynamic_cast<Constant*>(lfs->rhs.get());
     BOOST_TEST(right_const != nullptr);
     BOOST_TEST(right_const->value == 4);
+}
+
+BOOST_AUTO_TEST_CASE(test_right_side) {
+    Lexer lexer = Lexer("(0-3)*x=6");
+    Parser parser = Parser(lexer);
+
+    parser.parse();
+
+    auto lfs = dynamic_cast<Operation*>(parser.getLfs().get());
+    auto rhs = dynamic_cast<Constant*>(parser.getRhs().get());
+    BOOST_TEST(rhs->value == 6);
+    BOOST_TEST(lfs->type == OperationTypes::multiplication);
 }
 
 BOOST_AUTO_TEST_SUITE_END()
