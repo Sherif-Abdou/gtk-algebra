@@ -25,6 +25,7 @@ struct Operation: public Expression {
     unique_ptr<Expression> lfs;
     unique_ptr<Expression> rhs;
     OperationTypes type;
+    bool isParenth;
 };
 
 

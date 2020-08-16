@@ -18,7 +18,9 @@ enum TokenTypes {
     tok_times = -5,
     tok_divide = -6,
     tok_equals = -7,
-    tok_eof = -8
+    tok_eof = -8,
+    tok_open_paren = -9,
+    tok_close_paren = -10
 };
 
 struct Token {

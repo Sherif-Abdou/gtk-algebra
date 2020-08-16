@@ -59,4 +59,16 @@ BOOST_AUTO_TEST_CASE(test_other_operation) {
     BOOST_TEST(right_const != nullptr);
 }
 
+BOOST_AUTO_TEST_CASE(test_parenth_operation) {
+    Lexer lexer = Lexer("(2+3)*4");
+    Parser parser = Parser(lexer);
+
+    parser.parse();
+
+    auto lfs = dynamic_cast<Operation*>(parser.getLfs().get());
+    auto right_const = dynamic_cast<Constant*>(lfs->rhs.get());
+    BOOST_TEST(right_const != nullptr);
+    BOOST_TEST(right_const->value == 4);
+}
+
 BOOST_AUTO_TEST_SUITE_END()

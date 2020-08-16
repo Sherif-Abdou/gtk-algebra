@@ -48,6 +48,10 @@ Token Lexer::next() {
             return tok_divide;
         case '=':
             return tok_equals;
+        case '(':
+            return tok_open_paren;
+        case ')':
+            return tok_close_paren;
         default:
             return {tok_variable, string {c}};
     }
