@@ -5,3 +5,7 @@
 #include "Variable.h"
 
 Variable::Variable(const Variable::string &name) : name(name) {}
+
+bool Variable::has_variable() {
+    return true;
+}

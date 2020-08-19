@@ -22,6 +22,8 @@ enum OperationTypes {
 struct Operation: public Expression {
     Operation(OperationTypes type);
 
+    bool has_variable() override;
+
     unique_ptr<Expression> lfs;
     unique_ptr<Expression> rhs;
     OperationTypes type;

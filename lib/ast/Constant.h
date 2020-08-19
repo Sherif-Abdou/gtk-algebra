@@ -12,6 +12,8 @@ struct Constant: public Expression {
     double value;
 
     Constant(double value);
+
+    bool has_variable() override;
 };
 
 

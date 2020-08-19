@@ -14,6 +14,8 @@ struct Variable: public Expression {
     string name;
 
     Variable(const string &name);
+
+    bool has_variable() override;
 };
 
 

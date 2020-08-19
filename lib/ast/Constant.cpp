@@ -7,3 +7,7 @@
 
 Constant::Constant(double value) : value(value) {}
 
+bool Constant::has_variable() {
+    return false;
+}
+

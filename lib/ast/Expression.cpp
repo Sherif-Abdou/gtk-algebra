@@ -5,6 +5,4 @@
 #include "Expression.h"
 
 
-void Expression::none() {
 
-}

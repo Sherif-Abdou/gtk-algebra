@@ -7,7 +7,7 @@
 
 
 struct Expression {
-    virtual void none();
+    virtual bool has_variable() = 0;
 };
 
 
