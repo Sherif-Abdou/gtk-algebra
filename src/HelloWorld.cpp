@@ -3,6 +3,7 @@
 //
 
 #include "HelloWorld.h"
+#include "../lib/solver/Solver.h"
 
 HelloWorld::HelloWorld() {
     set_border_width(10);
@@ -24,7 +25,7 @@ void HelloWorld::on_submit_clicked() {
 
     auto text = this->top_box.get_equation();
 
-
-
+    auto answer = Solver::solve(text);
+    text = answer->to_string();
     this->answer_label.set_text(text);
 }

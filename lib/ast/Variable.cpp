@@ -14,3 +14,7 @@ bool Variable::has_variable() {
 unique_ptr<Constant> Variable::simplify() {
     throw std::exception();
 }
+
+std::string Variable::to_string() {
+    return this->name;
+}

@@ -20,6 +20,8 @@ public:
     bool has_variable() override;
 
     unique_ptr<Constant> simplify() override;
+
+    virtual std::string to_string() override;
 };
 
 

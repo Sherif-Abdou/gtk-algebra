@@ -17,6 +17,8 @@ struct Variable: public Expression {
 
     bool has_variable() override;
 
+    std::string to_string() override;
+
     unique_ptr<Constant> simplify() override;
 };
 

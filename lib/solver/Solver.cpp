@@ -26,3 +26,17 @@ unique_ptr<Constant> Solver::solve() {
     bool var_in_right = this->right_side->has_variable();
     return casted->simplify();
 }
+
+unique_ptr<Constant> Solver::solve(std::string full_str) {
+    auto lexer = Lexer(full_str);
+    auto parser = Parser(lexer);
+    parser.parse();
+
+    auto& left = parser.getLfs();
+    auto& right = parser.getRhs();
+
+    auto solver = Solver(std::move(left), std::move(right));
+
+    auto sol = solver.solve();
+    return std::move(sol);
+}

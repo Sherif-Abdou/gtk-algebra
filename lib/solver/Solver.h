@@ -6,6 +6,7 @@
 #define GTK_ALGEBRA_TEST_SOLVER_H
 
 
+#include <string>
 #include "../parser/Parser.h"
 
 class Solver {
@@ -15,6 +16,8 @@ private:
 public:
     explicit Solver(unique_ptr<Expression> left, unique_ptr<Expression> right);
     unique_ptr<Constant> solve();
+
+    static unique_ptr<Constant> solve(std::string full_str);
 };
 
 

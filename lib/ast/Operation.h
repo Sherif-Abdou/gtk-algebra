@@ -7,6 +7,7 @@
 
 
 #include <memory>
+#include <string>
 #include <unordered_map>
 #include "Expression.h"
 #include "Constant.h"
@@ -28,6 +29,8 @@ public:
     Operation(OperationTypes type);
 
     bool has_variable() override;
+
+    std::string to_string() override;
 
     unique_ptr<Expression> solve(unique_ptr<Expression> &other_side);
 

@@ -69,4 +69,26 @@ unique_ptr<Constant> Operation::simplify() {
     return std::make_unique<Constant>(new_value);
 }
 
+std::string Operation::to_string() {
+    auto operation_string = "";
+    switch (this->type) {
+        case addition:
+            operation_string = "+";
+            break;
+        case subtraction:
+            operation_string = "-";
+            break;
+        case multiplication:
+            operation_string = "*";
+            break;
+        case division:
+            operation_string = "/";
+            break;
+    }
+
+    auto full = this->lfs->to_string() + " " + operation_string + " " + this->rhs->to_string();
+
+    return isParenth ? "("+full+")" : full;
+}
+
 

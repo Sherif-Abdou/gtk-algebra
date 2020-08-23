@@ -14,6 +14,7 @@ using std::unique_ptr;
 struct Expression {
     virtual bool has_variable() = 0;
     virtual unique_ptr<Constant> simplify() = 0;
+    virtual std::string to_string() = 0;
 };
 
 
