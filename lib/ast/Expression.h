@@ -5,9 +5,15 @@
 #ifndef GTK_ALGEBRA_TEST_EXPRESSION_H
 #define GTK_ALGEBRA_TEST_EXPRESSION_H
 
+#include <memory>
+
+class Constant;
+
+using std::unique_ptr;
 
 struct Expression {
     virtual bool has_variable() = 0;
+    virtual unique_ptr<Constant> simplify() = 0;
 };
 
 

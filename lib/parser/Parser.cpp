@@ -16,6 +16,9 @@ Parser::Parser(Lexer &lexer) : lexer(lexer) {
 }
 
 void Parser::parse() {
+    if (isParsed) {
+        return;
+    }
     ScopeParser sub_parser_left = ScopeParser(this->lexer);
     auto ptr_left = sub_parser_left.parse_side();
     lfs = std::move(ptr_left);
@@ -23,17 +26,19 @@ void Parser::parse() {
     ScopeParser sub_parser_right = ScopeParser(this->lexer);
     auto ptr_right = sub_parser_right.parse_side();
     rhs = std::move(ptr_right);
+    isParsed = true;
 //    if (auto *op = dynamic_cast<Operation *>(ptr.get())) {
 //    } else {
 //        lfs = unique_ptr<Expression>(ptr.get());
 //    }
 }
 
-const unique_ptr<Expression> &Parser::getLfs() const {
+unique_ptr<Expression> &Parser::getLfs() {
     return lfs;
 }
 
-const unique_ptr<Expression> &Parser::getRhs() const {
+unique_ptr<Expression> &Parser::getRhs() {
     return rhs;
 }
+
 

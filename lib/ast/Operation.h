@@ -7,7 +7,9 @@
 
 
 #include <memory>
+#include <unordered_map>
 #include "Expression.h"
+#include "Constant.h"
 
 
 using std::unique_ptr;
@@ -19,10 +21,17 @@ enum OperationTypes {
     division = -4
 };
 
-struct Operation: public Expression {
+class Operation: public Expression {
+private:
+    std::unordered_map<OperationTypes, OperationTypes> reverses = std::unordered_map<OperationTypes, OperationTypes>();
+public:
     Operation(OperationTypes type);
 
     bool has_variable() override;
+
+    unique_ptr<Expression> solve(unique_ptr<Expression> &other_side);
+
+    unique_ptr<Constant> simplify() override;
 
     unique_ptr<Expression> lfs;
     unique_ptr<Expression> rhs;

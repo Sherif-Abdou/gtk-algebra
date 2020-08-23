@@ -20,11 +20,12 @@ public:
 
     void parse();
 
-    const unique_ptr<Expression> &getLfs() const;
-    const unique_ptr<Expression> &getRhs() const;
+    unique_ptr<Expression> &getLfs();
+    unique_ptr<Expression> &getRhs();
 private:
     unique_ptr<Expression> lfs;
     unique_ptr<Expression> rhs;
+    bool isParsed = false;
 protected:
     unique_ptr<Expression> curr_top;
     std::deque<Expression *> expr_stack;

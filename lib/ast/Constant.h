@@ -6,14 +6,20 @@
 #define GTK_ALGEBRA_TEST_CONSTANT_H
 
 
+#include <memory>
 #include "Expression.h"
 
-struct Constant: public Expression {
+using std::unique_ptr;
+
+class Constant: public Expression {
+public:
     double value;
 
     Constant(double value);
 
     bool has_variable() override;
+
+    unique_ptr<Constant> simplify() override;
 };
 
 
