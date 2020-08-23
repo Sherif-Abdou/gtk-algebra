@@ -16,6 +16,7 @@ unique_ptr<Constant> Solver::solve() {
     while (var_in_left && casted) {
         this->left_side = casted->solve(this->right_side);
 
+        left = this->left_side.get();
         var_in_left = this->left_side->has_variable();
         casted = dynamic_cast<Operation*>(left);
     }

@@ -18,20 +18,26 @@ bool Operation::has_variable() {
 unique_ptr<Expression> Operation::solve(unique_ptr<Expression> &other_side) {
     bool left_side_var = this->lfs->has_variable();
 
-    if (left_side_var || this->type == OperationTypes::subtraction || this->type == OperationTypes::division) {
+    if (left_side_var  || this->type == OperationTypes::subtraction || this->type == OperationTypes::division) {
         unique_ptr<Expression> new_exp = std::make_unique<Operation>(this->reverses[type]);
         auto new_exp_ptr = dynamic_cast<Operation*>(new_exp.get());
         new_exp_ptr->rhs = std::move(this->rhs);
         new_exp_ptr->lfs = std::move(other_side);
         other_side = std::move(new_exp);
+        if (this->type == OperationTypes::division && other_side->has_variable()) {
+            this->lfs.swap(other_side);
+        }
         return std::move(this->lfs);
     } else {
         unique_ptr<Expression> new_exp = std::make_unique<Operation>(this->reverses[type]);
         auto new_exp_ptr = dynamic_cast<Operation*>(new_exp.get());
         new_exp_ptr->lfs = std::move(this->lfs);
         new_exp_ptr->rhs = std::move(other_side);
+        if (new_exp_ptr->type == OperationTypes::division) {
+            new_exp_ptr->lfs.swap(new_exp_ptr->rhs);
+        }
         other_side = std::move(new_exp);
-        return std::move(this->lfs);
+        return std::move(this->rhs);
     }
 }
 
@@ -43,7 +49,7 @@ unique_ptr<Constant> Operation::simplify() {
     auto left = this->lfs->simplify()->value;
     auto right = this->rhs->simplify()->value;
 
-    auto new_value = 0;
+    double new_value = 0.0;
 
     switch (this->type) {
         case addition:
@@ -62,3 +68,5 @@ unique_ptr<Constant> Operation::simplify() {
 
     return std::make_unique<Constant>(new_value);
 }
+
+
