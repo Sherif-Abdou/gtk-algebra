@@ -10,16 +10,19 @@
 #include <gtkmm.h>
 #include <gtkmm/window.h>
 #include <gtkmm/window.h>
+#include "ui/TopBox.h"
 
-class HelloWorld: public Gtk::Window {
+class HelloWorld: public Gtk::Window, public TopBoxDelegate {
 public:
     HelloWorld();
     virtual ~HelloWorld();
 
 protected:
-    void on_clicked();
+    virtual void on_submit_clicked() override;
 
-    Gtk::Button btn;
+    TopBox top_box {};
+    Gtk::Box main_box = Gtk::Box(static_cast<Gtk::Orientation>(GTK_ORIENTATION_VERTICAL), 10);
+    Gtk::Label answer_label {};
 };
 
 
